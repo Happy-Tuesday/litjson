@@ -4,8 +4,7 @@ LitJSON
 A *.Net* library to handle conversions from and to JSON (JavaScript Object
 Notation) strings.
 
-[Project website][litjson].
-
+This fork includes [this patch](https://github.com/SONIC3D/litjson/commit/3cd16e3650f5f03765704b27700d4c3d37781a01.patch) for serializing float(Single) and long(Int64) types from this [pull request](https://github.com/lbv/litjson/pull/25) .
 
 ## Compiling
 
