@@ -1,20 +1,10 @@
-#region Header
-/**
- * JsonWriter.cs
- *   Stream-like facility to output JSON text.
- *
- * The authors disclaim copyright to this source code. For more details, see
- * the COPYING file included with this distribution.
- **/
-#endregion
-
+#define UNITY3D
 
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Text;
-
 
 namespace LitJson
 {
@@ -35,7 +25,10 @@ namespace LitJson
         public bool ExpectingValue;
         public int  Padding;
     }
-
+	
+	/// <summary>
+	/// Stream-like facility to output JSON text.
+	/// </summary>
     public class JsonWriter
     {
         #region Fields
@@ -459,5 +452,29 @@ namespace LitJson
 
             context.ExpectingValue = true;
         }
+
+		#if UNITY3D		
+		#region Unity specific
+
+		public void Write (UnityEngine.Vector2 vector2)
+		{
+			if (vector2 == null) return;
+
+			WriteObjectStart();
+			Put( string.Format( "\"x\":{0},\"y\":{1}", vector2.x, vector2.y ) );
+			WriteObjectEnd();
+		}
+
+		public void Write (UnityEngine.Vector3 vector3)
+		{
+			if (vector3 == null) return;
+
+			WriteObjectStart();
+			Put( string.Format( "\"x\":{0},\"y\":{1},\"z\":{2}", vector3.x, vector3.y, vector3.z ) );
+			WriteObjectEnd();
+		}
+
+		#endregion
+		#endif
     }
 }

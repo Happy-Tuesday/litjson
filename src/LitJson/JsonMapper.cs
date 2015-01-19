@@ -1,13 +1,4 @@
-#region Header
-/**
- * JsonMapper.cs
- *   JSON to .Net object and object to JSON conversions.
- *
- * The authors disclaim copyright to this source code. For more details, see
- * the COPYING file included with this distribution.
- **/
-#endregion
-
+#define UNITY3D
 
 using System;
 using System.Collections;
@@ -15,7 +6,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Reflection;
-
 
 namespace LitJson
 {
@@ -96,7 +86,9 @@ namespace LitJson
 
     public delegate IJsonWrapper WrapperFactory ();
 
-
+	/// <summary>
+	/// JSON to .Net object and object to JSON conversions.
+	/// </summary>
     public class JsonMapper
     {
         #region Fields
@@ -730,6 +722,22 @@ namespace LitJson
 
                 return;
             }
+			
+			#region UnityEngine specific
+			#if UNITY3D
+
+			if (obj is UnityEngine.Vector2) {
+				writer.Write((UnityEngine.Vector2) obj);
+				return;
+			}
+
+			if (obj is UnityEngine.Vector3) {
+				writer.Write( (UnityEngine.Vector3) obj );
+				return;
+			}
+
+			#endif
+			#endregion
 
             if (obj is String) {
                 writer.Write ((string) obj);
