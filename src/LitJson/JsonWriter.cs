@@ -474,6 +474,15 @@ namespace LitJson
 			WriteObjectEnd();
 		}
 
+		public void Write (UnityEngine.Color color)
+		{
+			if (color == null) return;
+			
+			WriteObjectStart();
+			Put( string.Format( "\"r\":{0},\"g\":{1},\"b\":{2},\"a\":{3}", color.r, color.g, color.b,color.a ) );
+			WriteObjectEnd();
+		}
+
 		#endregion
 		#endif
     }
