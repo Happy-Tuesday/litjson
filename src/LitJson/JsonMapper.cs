@@ -735,6 +735,11 @@ namespace LitJson
 				return;
 			}
 
+			if (obj is UnityEngine.Color) {
+				writer.Write( (UnityEngine.Color) obj );
+				return;
+			}
+
 			#endif
 			#endregion
 

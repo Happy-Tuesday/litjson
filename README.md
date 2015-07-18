@@ -9,15 +9,25 @@ Notation) strings flavoured for the Unity3D engine.
 
 #### UnityEngine types
 
- Further adaptions allow to pass UnityEngine types directly to the mapper:
+These already work out of the box
+
+```csharp
+JsonMapper.ToJson( AnimationCurve.EaseInOut(0,0,1,1) );
+```
+
+Further adaptions allow to pass UnityEngine types directly to the mapper:
+
 ```csharp
 JsonMapper.ToJson( Vector2.zero ); // Output { "x" : 0, "y" : 0 }
 JsonMapper.ToJson( Vector3.one );  // Output { "x" : 1, "y" : 1, "z" : 1 }
+
+JsonMapper.ToJson( Color.green );  // Output { "r" : 0, "g" : 1, "b" : 0, "a" : 1 }
 ```
 Of course reading back in also works:
 ```csharp
 var v2 = JsonMapper.ToObject<Vector2>( "{\"x\":0,\"y\":0}" ); 
 var v3 = JsonMapper.ToObject<Vector3>( "{\"x\":0,\"y\":0,\"z\":1}" ); 
+..
 ```
 
 #### float (Single) and long (Int64) types
