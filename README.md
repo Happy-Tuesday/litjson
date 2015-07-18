@@ -37,9 +37,9 @@ var v3 = JsonMapper.ToObject<Vector3>( "{\"x\":0,\"y\":0,\"z\":1}" );
 
 ## Build with Mono Develop / Xamarin Studio / Visual Studio / ..
 
- 1) Create a solution & Library project within your IDE and reference all files from ```/src/LitJson``` .
- 2) Add a configuration called Unity3D ```Project > Options > Build > Compiler``` and add Define Symbol ```UNITY3D``` .
- 3) Build the project .
+ 1. Create a solution & Library project within your IDE and reference all files from ```/src/LitJson``` .
+ 2. Add a configuration called Unity3D ```Project > Options > Build > Compiler``` and add Define Symbol ```UNITY3D``` .
+ 3. Build the project .
 
 
 ## Original README
