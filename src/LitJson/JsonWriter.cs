@@ -40,6 +40,7 @@ namespace LitJson
 		private char[] hex_seq;
 		private int indentation;
 		private int indent_value;
+		private string indent_string;
 		private StringBuilder inst_string_builder;
 		private bool pretty_print;
 		private bool validate;
@@ -56,6 +57,11 @@ namespace LitJson
 				indentation = (indentation / indent_value) * value;
 				indent_value = value;
 			}
+		}
+		
+		public string IndentString {
+			get { return indent_string; }
+			set { indent_string = value; }
 		}
 
 		public bool PrettyPrint {
@@ -163,6 +169,7 @@ namespace LitJson
 			hex_seq = new char[4];
 			indentation = 0;
 			indent_value = 4;
+			indent_string = " ";
 			pretty_print = false;
 			validate = true;
 
@@ -198,7 +205,7 @@ namespace LitJson
 		{
 			if (pretty_print && !context.ExpectingValue)
 				for (int i = 0; i < indentation; i++)
-					writer.Write (' ');
+					writer.Write (indent_string);
 
 			writer.Write (str);
 		}
