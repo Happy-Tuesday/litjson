@@ -469,7 +469,10 @@ namespace LitJson
 				return;
 
 			WriteObjectStart ();
-			Put (string.Format ("\"x\":{0},\"y\":{1}", v2.x, v2.y));
+			WritePropertyName("x");
+			Write(v2.x);
+			WritePropertyName("y");
+			Write(v2.y);
 			WriteObjectEnd ();
 		}
 
@@ -479,7 +482,12 @@ namespace LitJson
 				return;
 
 			WriteObjectStart ();
-			Put (string.Format ("\"x\":{0},\"y\":{1},\"z\":{2}", v3.x, v3.y, v3.z));
+			WritePropertyName("x");
+			Write(v3.x);
+			WritePropertyName("y");
+			Write(v3.y);
+			WritePropertyName("z");
+			Write(v3.z);
 			WriteObjectEnd ();
 		}
 
@@ -489,7 +497,14 @@ namespace LitJson
 				return;
 
 			WriteObjectStart ();
-			Put (string.Format ("\"x\":{0},\"y\":{1},\"z\":{2},\"w\":{3}", v4.x, v4.y, v4.z, v4.w));
+			WritePropertyName("x");
+			Write(v4.x);
+			WritePropertyName("y");
+			Write(v4.y);
+			WritePropertyName("z");
+			Write(v4.z);
+			WritePropertyName("z");
+			Write(v4.w);
 			WriteObjectEnd ();
 		}
 
@@ -499,7 +514,14 @@ namespace LitJson
 				return;
 
 			WriteObjectStart ();
-			Put (string.Format ("\"x\":{0},\"y\":{1},\"z\":{2},\"w\":{3}", q.x, q.y, q.z, q.w));
+			WritePropertyName("x");
+			Write(q.x);
+			WritePropertyName("y");
+			Write(q.y);
+			WritePropertyName("z");
+			Write(q.z);
+			WritePropertyName("z");
+			Write(q.w);
 			WriteObjectEnd ();
 		}
 
@@ -509,9 +531,38 @@ namespace LitJson
 				return;
 
 			WriteObjectStart ();
-			Put (string.Format ("\"m00\":{0},\"m33\":{1},\"m23\":{2},\"m13\":{3},\"m03\":{4},\"m32\":{5},\"m12\":{6},\"m02\":{7},\"m22\":{8},\"m21\":{9},\"m11\":{10},\"m01\":{11},\"m30\":{12},\"m20\":{13},\"m10\":{14},\"m31\":{15}", 
-				m.m00, m.m33, m.m23, m.m13, m.m03, m.m32, m.m12, m.m02, m.m22, m.m21, m.m11, m.m01, m.m30, m.m20, m.m10, m.m31));
-
+			WritePropertyName("m00");
+			Write(m.m00);
+			WritePropertyName("m33");
+			Write(m.m33);
+			WritePropertyName("m23");
+			Write(m.m23);
+			WritePropertyName("m13");
+			Write(m.m13);
+			WritePropertyName("m03");
+			Write(m.m03);
+			WritePropertyName("m32");
+			Write(m.m32);
+			WritePropertyName("m12");
+			Write(m.m12);
+			WritePropertyName("m02");
+			Write(m.m02);
+			WritePropertyName("m22");
+			Write(m.m22);
+			WritePropertyName("m21");
+			Write(m.m21);
+			WritePropertyName("m11");
+			Write(m.m11);
+			WritePropertyName("m01");
+			Write(m.m01);
+			WritePropertyName("m30");
+			Write(m.m30);
+			WritePropertyName("m20");
+			Write(m.m20);
+			WritePropertyName("m10");
+			Write(m.m10);
+			WritePropertyName("m31");
+			Write(m.m31);
 			WriteObjectEnd ();
 		}
 
