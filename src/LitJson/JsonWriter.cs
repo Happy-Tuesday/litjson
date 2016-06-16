@@ -472,9 +472,6 @@ namespace LitJson
 
 		public void Write (UnityEngine.Vector2 v2)
 		{
-			if (v2 == null)
-				return;
-
 			WriteObjectStart ();
 			WritePropertyName("x");
 			Write(v2.x);
@@ -485,9 +482,6 @@ namespace LitJson
 
 		public void Write (UnityEngine.Vector3 v3)
 		{
-			if (v3 == null)
-				return;
-
 			WriteObjectStart ();
 			WritePropertyName("x");
 			Write(v3.x);
@@ -500,9 +494,6 @@ namespace LitJson
 
 		public void Write (UnityEngine.Vector4 v4)
 		{
-			if (v4 == null)
-				return;
-
 			WriteObjectStart ();
 			WritePropertyName("x");
 			Write(v4.x);
@@ -517,9 +508,6 @@ namespace LitJson
 
 		public void Write (UnityEngine.Quaternion q)
 		{
-			if (q == null)
-				return;
-
 			WriteObjectStart ();
 			WritePropertyName("x");
 			Write(q.x);
@@ -534,9 +522,6 @@ namespace LitJson
 
 		public void Write (UnityEngine.Matrix4x4 m)
 		{
-			if (m == null)
-				return;
-
 			WriteObjectStart ();
 			WritePropertyName("m00");
 			Write(m.m00);
@@ -599,9 +584,6 @@ namespace LitJson
 
 		public void Write (UnityEngine.Color c)
 		{
-			if (c == null)
-				return;
-			
 			WriteObjectStart ();
 			Put (string.Format ("\"r\":{0},\"g\":{1},\"b\":{2},\"a\":{3}", c.r, c.g, c.b, c.a));
 			WriteObjectEnd ();
