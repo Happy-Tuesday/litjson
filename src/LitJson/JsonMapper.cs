@@ -266,7 +266,6 @@ namespace LitJson
 				PropertyMetadata p_data = new PropertyMetadata ();
 				p_data.Info = f_info;
 				p_data.IsField = true;
-
 				props.Add (p_data);
 			}
 
@@ -871,6 +870,11 @@ namespace LitJson
 
 			writer.WriteObjectStart ();
 			foreach (PropertyMetadata p_data in props) {
+				#if UNITY3D
+				// Skip certain UnityEngine specific types that can't be serialized
+				if (IsUnserializableUnityType(p_data)) { continue; }
+				#endif			
+				
 				if (p_data.IsField) {
 					writer.WritePropertyName (p_data.Info.Name);
 					WriteValue (((FieldInfo)p_data.Info).GetValue (obj),
@@ -887,6 +891,34 @@ namespace LitJson
 			}
 			writer.WriteObjectEnd ();
 		}
+		
+		#if UNITY3D
+		private static bool IsUnserializableUnityType (PropertyMetadata p_data)
+		{
+			Type t;
+			if (p_data.IsField) {
+				var f_Info = (FieldInfo)p_data.Info;
+				t = f_Info.FieldType;
+			} else {
+				var p_Info = (PropertyInfo)p_data.Info;
+				t = p_Info.PropertyType;
+			}
+			// TODO Unserializable members need to be extended
+			if (t == typeof (UnityEngine.GameObject)) {
+				return true;
+			}
+			if (t == typeof (UnityEngine.Transform)) {
+				return true;
+			}
+			if (t == typeof (UnityEngine.Material)) {
+				return true;
+			}
+			if (t == typeof (UnityEngine.Object)) {
+				return true;
+			}
+			return false;
+		}
+		#endif
 
 		#endregion
 
