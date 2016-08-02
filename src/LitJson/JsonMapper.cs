@@ -922,6 +922,18 @@ namespace LitJson
 
 		#endregion
 
+		public static string ToPrettyJson(object obj)
+		{
+			lock (static_writer_lock) {
+				static_writer.Reset();
+
+				static_writer.PrettyPrint = true;
+				WriteValue(obj, static_writer, true, 0);
+				static_writer.PrettyPrint = false;
+
+				return static_writer.ToString();
+			}
+		}
 
 		public static string ToJson (object obj)
 		{
