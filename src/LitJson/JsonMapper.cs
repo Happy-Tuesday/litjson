@@ -868,13 +868,16 @@ namespace LitJson
 			AddTypeProperties (obj_type);
 			IList<PropertyMetadata> props = type_properties [obj_type];
 
+			// TODO Class wide ignore attributes must be handled already before creating the JSON object
 			writer.WriteObjectStart ();
 			foreach (PropertyMetadata p_data in props) {
 				#if UNITY3D
 				// Skip certain UnityEngine specific types that can't be serialized
 				if (IsUnserializableUnityType(p_data)) { continue; }
-				#endif			
-				
+				#endif
+				// Skip certain fields / properties that has the Ignore Attribute set
+				if (IsPropertyIgnored(p_data)) { continue; }
+
 				if (p_data.IsField) {
 					writer.WritePropertyName (p_data.Info.Name);
 					WriteValue (((FieldInfo)p_data.Info).GetValue (obj),
@@ -891,18 +894,42 @@ namespace LitJson
 			}
 			writer.WriteObjectEnd ();
 		}
+
+		private static bool IsPropertyIgnored(PropertyMetadata p_data)
+		{
+			IgnoreAttribute[] attr = (IgnoreAttribute[])p_data.Info.GetCustomAttributes(typeof(IgnoreAttribute), false);
+			return 0 < attr.Length;
+		}
+
+		//private static bool IsIgnored (PropertyMetadata p_data)
+		//{
+		//	Type t;
+		//	t = GetTypeOf(p_data);
+		//	IgnoreAttribute attr = (IgnoreAttribute) Attribute.GetCustomAttribute(t, typeof(IgnoreAttribute));
+		//	// If the attribute is found the property shall be ignored
+		//	return attr != null;
+		//}
+
+		private static Type GetTypeOf(PropertyMetadata p_data)
+		{
+			Type t;
+			if (p_data.IsField)
+			{
+				var f_Info = (FieldInfo)p_data.Info;
+				t = f_Info.FieldType;
+			}
+			else {
+				var p_Info = (PropertyInfo)p_data.Info;
+				t = p_Info.PropertyType;
+			}
+			return t;
+		}
 		
 		#if UNITY3D
 		private static bool IsUnserializableUnityType (PropertyMetadata p_data)
 		{
 			Type t;
-			if (p_data.IsField) {
-				var f_Info = (FieldInfo)p_data.Info;
-				t = f_Info.FieldType;
-			} else {
-				var p_Info = (PropertyInfo)p_data.Info;
-				t = p_Info.PropertyType;
-			}
+			t = GetTypeOf(p_data);
 			// TODO Unserializable members need to be extended
 			if (t == typeof (UnityEngine.GameObject)) {
 				return true;
