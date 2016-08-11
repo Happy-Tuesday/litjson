@@ -7,6 +7,22 @@ Notation) strings flavoured for the Unity3D engine.
 
 ## Feature log
 
+#### Attributes
+
+Introducing attributes for JsonMappers when serializing to JSON String Objects. Currently only the ```Ignore``` Attribute is available but future implementations may bring new ones.
+
+```csharp
+public class Foo
+{
+  public string id;
+  [LitJson.Ignore]
+  public string privateName;
+}
+```
+
+This would simply ignore the ```privateMember``` field and only output ```{ "id" : "bar" }```.  
+The Attribute is applyable to Classes, Properties and Fields.
+
 #### UnityEngine types
 
 These already work out of the box
