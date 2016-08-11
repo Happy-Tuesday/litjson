@@ -20,7 +20,7 @@ public class Foo
 }
 ```
 
-This would simply ignore the ```privateMember``` field and only output ```{ "id" : "bar" }```.  
+```LitJson.JsonMapper.ToJson(foo);``` would simply ignore the ```privateMember``` field and only output ```{ "id" : "bar" }```.  
 The Attribute is applyable to Classes, Properties and Fields.
 
 #### UnityEngine types
