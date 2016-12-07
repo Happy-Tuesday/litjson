@@ -34,15 +34,15 @@ JsonMapper.ToJson( AnimationCurve.EaseInOut(0,0,1,1) );
 Further adaptions allow to pass UnityEngine types directly to the mapper:
 
 ```csharp
-JsonMapper.ToJson( Vector2.zero ); // Output { "x" : 0, "y" : 0 }
-JsonMapper.ToJson( Vector3.one );  // Output { "x" : 1, "y" : 1, "z" : 1 }
-JsonMapper.ToJson( Vector4.one );  // Output { "x" : 1, "y" : 1, "z" : 1, "w" : 1 }
+JsonMapper.ToJson( Vector2.zero );         // Output { "x" : 0, "y" : 0 }
+JsonMapper.ToJson( Vector3.one );          // Output { "x" : 1, "y" : 1, "z" : 1 }
+JsonMapper.ToJson( Vector4.one );          // Output { "x" : 1, "y" : 1, "z" : 1, "w" : 1 }
 JsonMapper.ToJson( Quaternion.identity );  // Output { "x" : 0, "y" : 0, "z" : 0, "w" : 0 }
-JsonMapper.ToJson( Matrix4x4.zero );  // Output { "m33" : 0, .. }
-JsonMapper.ToJson( Color.green );  // Output { "r" : 0, "g" : 1, "b" : 0, "a" : 1 }
+JsonMapper.ToJson( Matrix4x4.zero );       // Output { "m33" : 0, .. }
+JsonMapper.ToJson( Color.green );          // Output { "r" : 0, "g" : 1, "b" : 0, "a" : 1 }
 
-JsonMapper.ToJson( Ray );  // Output { "origin" : {V3}, "direction" : {V3} }
-JsonMapper.ToJson( RaycastHit );  // Output { .. }
+JsonMapper.ToJson( Ray );                  // Output { "origin" : {V3}, "direction" : {V3} }
+JsonMapper.ToJson( RaycastHit );           // Output { .. }
 ```
 Of course reading back in also works:
 ```csharp
